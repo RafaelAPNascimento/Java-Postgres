@@ -1,6 +1,6 @@
 subindo backend jax-rs, postgres, wildfly com docker compose...
 
-developing
+developing...
 
 Wildfly Datasource configuration:
 
