@@ -49,6 +49,7 @@ public class PersonApiImpl implements PersonApi {
     public Response updatePerson(Person person) {
 
         LOGGER.info("update Person\n" + person);
+        personService.updatePerson(person);
         return Response.ok().build();
     }
 
@@ -56,6 +57,16 @@ public class PersonApiImpl implements PersonApi {
     public Response deletePerson(Long id) {
 
         LOGGER.info("delete Person id " + id);
-        return Response.ok().build();
+        try {
+            boolean deleted = personService.deletePerson(id);
+            if (deleted)
+                return Response.ok().build();
+
+            throw new RuntimeException("Nao foi possivel remover person");
+        }
+        catch (RuntimeException e) {
+            return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(e.getMessage()).build();
+        }
+
     }
 }
