@@ -42,3 +42,7 @@ put the postgre driver there and module.xml file:
     </dependencies>
 </module>
 ```
+
+start up
+
+        docker-compose up

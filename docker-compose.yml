@@ -1,0 +1,37 @@
+version: "3"
+services:
+  db:
+    build: Database
+    environment:
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_USER: postgres
+      POSTGRES_DB: pessoaDB
+    ports:
+    - 5555:5432
+    volumes:
+    - db_data:/var/lib/postgresql
+    expose:
+      - 5432
+    networks:
+      - net-backend
+
+  backend:
+    build:
+      context: .
+      dockerfile: docker/Dockerfile
+    environment:
+      - POSTGRES_URI=db:5432
+    ports:
+      - 8180:8080
+    expose:
+      - 8080
+    depends_on:
+      - db
+    networks:
+      - net-backend
+
+networks:
+  net-backend
+
+volumes:
+  db_data
