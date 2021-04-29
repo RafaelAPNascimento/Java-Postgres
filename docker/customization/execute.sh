@@ -43,8 +43,8 @@ data-source add --jndi-name=java:jboss/datasources/backend_DS --name=backend_DS 
 
 EOF
 
-# Deploy the WAR do backend
-cp /opt/jboss/wildfly/customization/desafio-tecnico-prevents.war $JBOSS_HOME/$JBOSS_MODE/deployments/java-postgres-be.war
+# Deploy app .war file to wildfly
+cp /opt/jboss/wildfly/customization/java-postgres-be.war $JBOSS_HOME/$JBOSS_MODE/deployments/java-postgres-be.war
 
 echo "=> Datasource configurado."
 if [ "$JBOSS_MODE" = "standalone" ]; then

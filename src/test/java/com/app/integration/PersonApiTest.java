@@ -13,7 +13,7 @@ import static org.apache.http.HttpStatus.SC_OK;
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 public class PersonApiTest {
 
-    private final static String BASE_URI = "http://localhost:8080/java-postgres-be/api";
+    private final static String BASE_URI = "http://localhost:8180/java-postgres-be/api";
     private final static String BASE_PATH = "/person";
 
     private Person[] persons;
