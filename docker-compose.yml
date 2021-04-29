@@ -1,4 +1,4 @@
-version: "3"
+version: "3.2"
 services:
   db:
     build: Database
@@ -9,7 +9,7 @@ services:
     ports:
       - 5555:5432
     volumes:
-      - db_data:/var/lib/postgresql
+      - db_data:/var/lib/postgresql/data
     expose:
       - 5432
     networks:
@@ -31,7 +31,7 @@ services:
       - net-backend
 
 networks:
-  net-backend
+  net-backend:
 
 volumes:
-  db_data
+  db_data:
