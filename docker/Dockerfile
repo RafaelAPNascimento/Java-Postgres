@@ -8,7 +8,7 @@ RUN mvn clean package
 
 FROM jboss/wildfly
 EXPOSE 8080
-ADD Java-Postgres/docker/customization /opt/jboss/wildfly/customization
+ADD ./docker/customization /opt/jboss/wildfly/customization
 COPY --from=Builder /app/target/java-postgres-be.war /opt/jboss/wildfly/customization
 
 CMD ["/opt/jboss/wildfly/customization/execute.sh"]
