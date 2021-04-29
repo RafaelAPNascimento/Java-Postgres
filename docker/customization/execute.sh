@@ -27,10 +27,10 @@ echo "=========> POSTGRESQL_URI (docker with networking): " $POSTGRES_URI
 echo $JBOSS_HOME/bin/$JBOSS_MODE.sh -b 0.0.0.0 -c $JBOSS_CONFIG &
 $JBOSS_HOME/bin/$JBOSS_MODE.sh -b 0.0.0.0 -c $JBOSS_CONFIG &
 
-echo "==========> Aguardando Wildfly iniciar..."
+echo "==========> Waiting Wildfly to start..."
 wait_for_server
 
-echo "==========> Configurando o datasource..."
+echo "==========> Configuring the datasource..."
 
 $JBOSS_CLI -c << EOF
 # Criando o modulo PostgreSQL no wildfly
@@ -46,12 +46,12 @@ EOF
 # Deploy app .war file to wildfly
 cp /opt/jboss/wildfly/customization/java-postgres-be.war $JBOSS_HOME/$JBOSS_MODE/deployments/java-postgres-be.war
 
-echo "=> Datasource configurado."
+echo "=> Datasource done!"
 if [ "$JBOSS_MODE" = "standalone" ]; then
   $JBOSS_CLI -c ":shutdown"
 else
   $JBOSS_CLI -c "/host=*:shutdown"
 fi
 
-echo "=> Reiniciando o WildFly..."
+echo "=> Restarting WildFly..."
 $JBOSS_HOME/bin/$JBOSS_MODE.sh -b 0.0.0.0 -c $JBOSS_CONFIG
