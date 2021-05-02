@@ -1,4 +1,6 @@
-subindo backend jax-rs, postgres, wildfly com docker compose...
+subindo backend jax-rs, postgres, wildfly com docker compose
+
+        docker-compose up
 
 developing...
 
