@@ -2,7 +2,7 @@ package com.app.rest;
 
 import com.app.model.Person;
 
-import javax.transaction.Transactional;
+import javax.validation.Valid;
 import javax.ws.rs.*;
 import javax.ws.rs.core.Response;
 
@@ -24,15 +24,13 @@ public interface PersonApi {
     @POST
     @Consumes(APPLICATION_JSON)
     @Produces(APPLICATION_JSON)
-    public Response savePerson(Person person);
+    public Response savePerson(@Valid Person person);
 
     @PUT
     @Consumes(APPLICATION_JSON)
-    //@Transactional
     public Response updatePerson(Person person);
 
     @DELETE
     @Consumes(APPLICATION_JSON)
-    //@Transactional
     public Response deletePerson(final @QueryParam("id") Long id);
 }

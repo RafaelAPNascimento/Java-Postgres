@@ -5,20 +5,40 @@ import org.junit.jupiter.api.*;
 
 import static io.restassured.RestAssured.given;
 import static io.restassured.http.ContentType.JSON;
-import static org.apache.http.HttpStatus.SC_CREATED;
-import static org.apache.http.HttpStatus.SC_OK;
+import static org.apache.http.HttpStatus.*;
 
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 @Tag("integration")
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 public class PersonApiTest {
 
-    private final static String HOST = "http://3.134.86.17";
-    //private final static String HOST = "http://127.0.0.1";
-    private final static String BASE_URI = HOST + ":8180/java-postgres-be/api";
+    // k8
+    //private final static String HOST = "http://3.134.86.17";
+    //private final static String BASE_URI = HOST + ":8180/java-postgres-be/api";
+
+    private final static String HOST = "http://127.0.0.1";
+    private final static String BASE_URI = HOST + ":8080/java-postgres-be/api";
     private final static String BASE_PATH = "/person";
 
     private Person[] persons;
+
+    @Test
+    @DisplayName("Should return status 400 when sending invalid payload by the constraints")
+    public void shouldReturn400InvalidBody() {
+
+        Person person = Person.builder().age(15).name("aaa").build();
+
+        given().baseUri(BASE_URI)
+                .basePath(BASE_PATH)
+                .contentType(JSON)
+                .request()
+                .body(person)
+                .log().all()
+                .when().post()
+                .then()
+                .log().all()
+                .assertThat().statusCode(SC_BAD_REQUEST);
+    }
 
     @Test
     @Order(1)
